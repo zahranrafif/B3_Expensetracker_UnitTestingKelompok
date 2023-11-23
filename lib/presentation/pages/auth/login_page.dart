@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
               showDialogError(state.response.message);
             }
           }
-          if(state is AuthError){
+          if (state is AuthError) {
             showDialogError(state.error);
           }
         },
@@ -153,31 +153,41 @@ class _LoginPageState extends State<LoginPage> {
                                 _buildInputPassword(),
                                 const SizedBox(height: 10),
                                 ButtonScreen(
-                                  isLoading: (state is AuthLoginLoading) ? true : false,
-                                  text: 'MASUK',
-                                  action: () {
-                                    if (_formLoginKey.currentState!.validate()) {
-                                      _formLoginKey.currentState!.save();
+                                    isLoading: (state is AuthLoginLoading)
+                                        ? true
+                                        : false,
+                                    text: 'MASUK',
+                                    action: () {
+                                      if (_formLoginKey.currentState!
+                                          .validate()) {
+                                        _formLoginKey.currentState!.save();
 
-                                      _authBloc.add(AuthLogin(
-                                        email: _emailCtrl.text, password: _passwordCtrl.text
-                                      ));
-                                    } else {
-                                      debugPrint("Not Validate");
-                                    }
-                                  }
-                                ),
+                                        _authBloc.add(AuthLogin(
+                                            email: _emailCtrl.text,
+                                            password: _passwordCtrl.text));
+                                      } else {
+                                        debugPrint("Not Validate");
+                                      }
+                                    }),
                               ],
                             ),
                           ),
                           _buildSignupBtn(),
-                          const SizedBox(height: 40,),
+                          const SizedBox(
+                            height: 40,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const[
-                              Text('ExpenseTracker ©2023', style: displayFooterStyle,),
-                              Text('by Abdil Tegar Arifin', style: displayFooterStyle,),
+                            children: const [
+                              Text(
+                                'ExpenseTracker ©2023',
+                                style: displayFooterStyle,
+                              ),
+                              Text(
+                                'by Abdil Tegar Arifin',
+                                style: displayFooterStyle,
+                              ),
                             ],
                           )
                         ],
@@ -193,23 +203,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  showDialogError(String message){
+  showDialogError(String message) {
     return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Login Gagal'),
-          content: Text(message),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true).pop('dialog');
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Login Gagal'),
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop('dialog');
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        });
   }
 }
